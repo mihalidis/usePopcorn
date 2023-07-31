@@ -1,5 +1,11 @@
 import { useState } from "react"
+import PropTypes from "prop-types";
+
 import ToggleButton from "./ToggleButton"
+
+SearchedMovies.propTypes = {
+    children: PropTypes.node
+}
 
 function SearchedMovies({ children }) {
   const [isOpen, setIsOpen] = useState(true);

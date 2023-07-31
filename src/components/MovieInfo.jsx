@@ -1,14 +1,22 @@
-import ImdbLogo from "../assets/imdb.png"
-import BackButton from "../assets/arrow-left.png"
+import PropTypes from "prop-types";
 import { useState } from "react"
+
 import ToggleButton from "./ToggleButton"
 import Rating from "./Rating.jsx";
+
+import ImdbLogo from "../assets/imdb.png"
+import BackButton from "../assets/arrow-left.png"
+
+MovieInfo.propTypes = {
+  selectedMovie: PropTypes.object,
+  setSelectedMovie: PropTypes.func
+}
 function MovieInfo({ selectedMovie, setSelectedMovie }) {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedStar, setSelectedStar] = useState(-1);
 
   function handleAddToList() {
-    console.log(selectedMovie.Title, selectedStar);
+    console.log(selectedMovie.Title, selectedStar+1);
   }
 
   return (

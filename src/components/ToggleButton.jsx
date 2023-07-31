@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+ToggleButton.propTypes = {
+  isOpen: PropTypes.bool,
+  setIsOpen: PropTypes.func
+}
+
 function ToggleButton({isOpen, setIsOpen}) {
   return (
     <>

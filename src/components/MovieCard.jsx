@@ -1,3 +1,13 @@
+import PropTypes from "prop-types";
+
+MovieCard.propTypes = {
+  children: PropTypes.node,
+  movie: PropTypes.object,
+  title: PropTypes.string,
+  poster: PropTypes.string,
+  setSelectedMovie: PropTypes.func
+}
+
 function MovieCard({children, movie, title, poster, setSelectedMovie}) {
   return (
     <>

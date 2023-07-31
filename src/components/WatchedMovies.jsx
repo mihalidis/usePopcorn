@@ -1,8 +1,15 @@
-import ImdbLogo from "../assets/imdb.png"
-import MovieCard from "./MovieCard"
-import { calculateAverage } from "../helper"
 import { useState } from "react"
+import PropTypes from "prop-types";
+
+import MovieCard from "./MovieCard"
 import ToggleButton from "./ToggleButton"
+
+import { calculateAverage } from "../helper"
+import ImdbLogo from "../assets/imdb.png"
+
+WatchedMovies.propTypes = {
+  watchedMovies: PropTypes.object
+}
 
 function WatchedMovies({ watchedMovies }) {
   const [isOpen, setIsOpen] = useState(true);

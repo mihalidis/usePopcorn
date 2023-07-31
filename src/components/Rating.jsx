@@ -1,5 +1,12 @@
-import Star from "./Star.jsx";
 import {useState} from "react";
+import PropTypes from "prop-types";
+
+import Star from "./Star.jsx";
+
+Rating.propTypes = {
+    selectedStar: PropTypes.number,
+    setSelectedStar: PropTypes.func
+}
 
 function Rating({selectedStar, setSelectedStar}) {
     const [currentHoveredStar, setCurrentHoveredStar] = useState(-1);
