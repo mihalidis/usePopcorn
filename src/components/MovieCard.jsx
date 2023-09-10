@@ -5,13 +5,17 @@ MovieCard.propTypes = {
   movie: PropTypes.object,
   title: PropTypes.string,
   poster: PropTypes.string,
+  selectedMovie: PropTypes.object,
   setSelectedMovie: PropTypes.func
 }
 
-function MovieCard({children, movie, title, poster, setSelectedMovie}) {
+function MovieCard({children, movie, title, poster, selectedMovie, setSelectedMovie}) {
+  const isSelected = selectedMovie?.imdbID === movie?.imdbID;
   return (
     <>
-      <div onClick={() => setSelectedMovie(movie)} className="movie-card flex gap-x-[10px] items-center border-b-4 border-b-[#D65A31] cursor-pointer hover:border-b-[#4E4FEB]">
+      <div onClick={() => setSelectedMovie(movie)} className={`movie-card flex gap-x-[10px] items-center border-b-4 ${
+          isSelected ? 'border-b-4 border-b-[#4E4FEB]' : 'border-b-4 border-b-[#D65A31]'
+        } cursor-pointer hover:border-b-[#4E4FEB]`}>
         <img className="h-[90px]" src={poster} alt={title} />
         <div className="info p-[10px]">
           <span className="title">{title}</span>

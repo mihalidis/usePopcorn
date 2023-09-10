@@ -9,15 +9,12 @@ import BackButton from "../assets/arrow-left.png"
 
 MovieInfo.propTypes = {
   selectedMovie: PropTypes.object,
-  setSelectedMovie: PropTypes.func
+  setSelectedMovie: PropTypes.func,
+  handleAddToList: PropTypes.func
 }
-function MovieInfo({ selectedMovie, setSelectedMovie }) {
+function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedStar, setSelectedStar] = useState(-1);
-
-  function handleAddToList() {
-    console.log(selectedMovie.Title, selectedStar+1);
-  }
 
   return (
     <>
@@ -37,7 +34,7 @@ function MovieInfo({ selectedMovie, setSelectedMovie }) {
           isOpen && <div className="body flex flex-col items-center gap-y-[20px] pb-[20px]">
           <div className="flex flex-col items-center gap-y-[20px] rating p-[20px] bg-[#393E46] mt-[16px] w-full max-w-[323px] rounded-md">
             <Rating selectedStar={selectedStar} setSelectedStar={setSelectedStar} />
-            <button onClick={() => handleAddToList()} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px]">+Add to list</button>
+            <button onClick={() => handleAddToList(selectedMovie, selectedStar+1)} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px]">+Add to list</button>
           </div>
           <div className="movie-info flex flex-col items-start gap-y-[20px] w-full max-w-[323px]">
             <span className="text-[16px]">After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.</span>

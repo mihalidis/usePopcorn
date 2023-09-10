@@ -1,7 +1,20 @@
 import { useState } from "react"
+let typingTimer
 
-function Search() {
+function Search({ handleSearchResults }) {
   const [query, setQuery] = useState('');
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+      performSearch(e.target.value);
+    }, 500);
+  }
+
+  const performSearch = (search) => {
+    handleSearchResults(search)
+  }
 
   return (
     <>
@@ -10,7 +23,7 @@ function Search() {
         type="text"
         placeholder="Search movies..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)} />
+        onChange={(e) => handleInputChange(e)} />
     </>
   )
 }

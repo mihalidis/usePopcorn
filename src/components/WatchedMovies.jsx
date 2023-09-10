@@ -8,10 +8,10 @@ import { calculateAverage } from "../helper"
 import ImdbLogo from "../assets/imdb.png"
 
 WatchedMovies.propTypes = {
-  watchedMovies: PropTypes.object
+  watchedMovies: PropTypes.array
 }
 
-function WatchedMovies({ watchedMovies }) {
+function WatchedMovies({ watchedMovies, setWatchedMovies }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const watchedMoviesCount = watchedMovies.length;
@@ -36,7 +36,7 @@ function WatchedMovies({ watchedMovies }) {
           isOpen && <div className="body">
           {
               watchedMovies && watchedMovies.map(movie => (
-                <MovieCard key={movie.imdbID} title={movie.Title} poster={movie.Poster}>
+                <MovieCard key={movie.imdbID} movie={movie} title={movie.Title} poster={movie.Poster}>
                   <span className="imdb-rating"><img className="h-[32px] inline" src={ImdbLogo} alt="imdb-logo"></img> {movie.imdbRating}</span>
                   <span className="your-rating">🌟 {movie.userRating}</span>
                   <span className="movie-time">⏳ {movie.runtime}min</span>
