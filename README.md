@@ -21,8 +21,8 @@ This is an app for rating movies your watch.
 
 ### Links
 
-- Solution URL: [Github Repository]()
-- Live Site URL: [usePopcorn]()
+- Solution URL: [Github Repository](https://github.com/mihalidis/usePopcorn)
+- Live Site URL: [usePopcorn](https://use-popcorn-red.vercel.app/)
 
 ## My process
 
