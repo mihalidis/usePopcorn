@@ -33,9 +33,8 @@ function App() {
   }
 
   const handleAddToList = (movie, rating) => {
-    console.log('movie', movie)
-    console.log('rating', rating)
-    console.log(watchedMovies)
+    const findMovie = watchedMovies.find(item => item.imdbRating === movie.imdbRating)
+    if (!findMovie) setWatchedMovies((prev) => [...prev, {...movie, userRating: rating}])
   }
 
   return (

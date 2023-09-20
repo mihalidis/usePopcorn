@@ -11,7 +11,7 @@ WatchedMovies.propTypes = {
   watchedMovies: PropTypes.array
 }
 
-function WatchedMovies({ watchedMovies, setWatchedMovies }) {
+function WatchedMovies({ watchedMovies }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const watchedMoviesCount = watchedMovies.length;
