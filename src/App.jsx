@@ -7,17 +7,29 @@ import MovieCard from "./components/MovieCard"
 import CalendarLogo from "./assets/calendar.png"
 import EmptyState from './components/EmptyState'
 import Loupe from "./assets/loupe.png"
+import Loading from "./components/Loading"
 import { useState } from "react"
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([])
   const [watchedMovies, setWatchedMovies] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSearchResults = (search) => {
-    fetch(`http://www.omdbapi.com/?apikey=${import.meta.env.VITE_REACT_APP_API_KEY}&s=${search}`)
+  const handleSearchResults = async (search) => {
+    setIsLoading(true)
+    await fetch(`http://www.omdbapi.com/?apikey=${import.meta.env.VITE_REACT_APP_API_KEY}&s=${search}`)
     .then(response => response.json())
-    .then(data => setSearchedMovies(data.Search))
+    .then((data) => {
+      if (data.Response === "True") {
+        setSearchedMovies(data.Search)
+      } else {
+        setSearchedMovies([])
+      }
+    })
+    .finally(() => {
+      setIsLoading(false)
+    })
   }
 
   const handleAddToList = (movie, rating) => {
@@ -28,9 +40,10 @@ function App() {
 
   return (
     <>
-      <Header handleSearchResults={handleSearchResults} />
+      <Header handleSearchResults={handleSearchResults} searchResultCount={searchedMovies.length} />
       <div className='flex justify-center mt-[16px] gap-x-[20px]'>
-        <SearchedMovies>
+        {
+          isLoading ? <Loading /> : <SearchedMovies>
           {
             searchedMovies && searchedMovies.length > 0 ? searchedMovies.map(item => (
               <MovieCard key={item.imdbID} movie={item} poster={item.Poster} title={item.Title} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie}>
@@ -42,6 +55,7 @@ function App() {
             )) : <EmptyState text="Please search for the movie you would like to see more info." icon={Loupe} />
           }
         </SearchedMovies>
+        }
         {
           selectedMovie ? <MovieInfo 
                             selectedMovie={selectedMovie}

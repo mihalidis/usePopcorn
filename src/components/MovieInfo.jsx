@@ -4,6 +4,7 @@ import ToggleButton from "./ToggleButton"
 import Rating from "./Rating.jsx";
 import ImdbLogo from "../assets/imdb.png"
 import BackButton from "../assets/arrow-left.png"
+import Loading from "./Loading"
 
 MovieInfo.propTypes = {
   selectedMovie: PropTypes.object,
@@ -15,11 +16,17 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedStar, setSelectedStar] = useState(-1);
   const [currentMovie, setCurrentMovie] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=${import.meta.env.VITE_REACT_APP_API_KEY}&i=${selectedMovie.imdbID}`)
-    .then(response => response.json())
-    .then(data => setCurrentMovie(data))
+    async function fetchMovie() {
+      setIsLoading(true)
+      await fetch(`http://www.omdbapi.com/?apikey=${import.meta.env.VITE_REACT_APP_API_KEY}&i=${selectedMovie.imdbID}`)
+      .then(response => response.json())
+      .then(data => setCurrentMovie(data))
+      .finally(() => setIsLoading(false))
+    }
+    fetchMovie()
   }, [selectedMovie])
 
   return (
@@ -37,7 +44,7 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
           </div>
         </div>
         {
-          isOpen && currentMovie && <div className="body flex flex-col items-center gap-y-[20px] pb-[20px]">
+          isLoading ? <Loading /> : isOpen && currentMovie && <div className="body flex flex-col items-center gap-y-[20px] pb-[20px]">
           <div className="flex flex-col items-center gap-y-[20px] rating p-[20px] bg-[#393E46] mt-[16px] w-full max-w-[323px] rounded-md">
             <Rating selectedStar={selectedStar} setSelectedStar={setSelectedStar} />
             <button onClick={() => handleAddToList(selectedMovie, selectedStar+1)} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px]">+Add to list</button>
