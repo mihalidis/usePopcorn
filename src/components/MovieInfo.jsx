@@ -29,6 +29,11 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
     fetchMovie()
   }, [selectedMovie])
 
+  const addMovieToList = () => {
+    handleAddToList({...selectedMovie, ...currentMovie}, selectedStar+1)
+    setSelectedMovie(null)
+  }
+
   return (
     <>
       <div className="w-full max-w-lg bg-[#222831] rounded-md relative">
@@ -47,7 +52,7 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
           isLoading ? <Loading /> : isOpen && currentMovie && <div className="body flex flex-col items-center gap-y-[20px] pb-[20px]">
           <div className="flex flex-col items-center gap-y-[20px] rating p-[20px] bg-[#393E46] mt-[16px] w-full max-w-[323px] rounded-md">
             <Rating selectedStar={selectedStar} setSelectedStar={setSelectedStar} />
-            <button onClick={() => handleAddToList({...selectedMovie, ...currentMovie}, selectedStar+1)} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px] hover:bg-sky-700">+Add to list</button>
+            <button onClick={() => addMovieToList()} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px] hover:bg-[#71529A]">+Add to list</button>
           </div>
           <div className="movie-info flex flex-col items-start gap-y-[20px] w-full max-w-[323px]">
             <span className="text-[16px]">{currentMovie.Plot}</span>

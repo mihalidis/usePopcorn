@@ -47,7 +47,7 @@ const tempWatchedData = [
 
 function calculateAverage(array, valueName) {
   return array.reduce((acc, movie) => {
-    return acc + movie[valueName];
+    return acc + parseFloat(movie[valueName]);
   }, 0) / array.length;
 }
 
