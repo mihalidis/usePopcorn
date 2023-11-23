@@ -13,7 +13,7 @@ function MovieCard({children, movie, title, poster, selectedMovie, setSelectedMo
   const isSelected = selectedMovie?.imdbID === movie?.imdbID;
   return (
     <>
-      <div onClick={() => setSelectedMovie(movie)} className={`movie-card flex gap-x-[10px] items-center border-b-4 ${
+      <div onClick={setSelectedMovie ? () => setSelectedMovie(movie) : () => {return}} className={`movie-card flex gap-x-[10px] items-center border-b-4 ${
           isSelected ? 'border-b-4 border-b-[#4E4FEB]' : 'border-b-4 border-b-[#D65A31]'
         } cursor-pointer hover:border-b-[#4E4FEB]`}>
         <img className="w-[70px] h-[95px] object-cover" src={poster} alt={title} />

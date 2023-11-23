@@ -20,7 +20,7 @@ function WatchedMovies({ watchedMovies }) {
 
   return (
     <>
-      <div className="w-full max-w-lg bg-[#222831] rounded-md relative">
+      <div className="w-full flex-1 bg-[#222831] rounded-md relative">
         <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className="header bg-[#393E46] px-[16px] pt-[45px] pb-[16px]">
           <h6 className="mb-[8px]">MOVIES YOU WATCHED</h6>
@@ -37,7 +37,7 @@ function WatchedMovies({ watchedMovies }) {
                 <MovieCard key={movie.imdbID} movie={movie} title={movie.Title} poster={movie.Poster}>
                   <span className="imdb-rating"><img className="h-[32px] inline" src={ImdbLogo} alt="imdb-logo"></img> {movie.imdbRating}</span>
                   <span className="your-rating">🌟 {movie.userRating}</span>
-                  <span className="movie-time">⏳ {movie.Runtime}min</span>
+                  <span className="movie-time">⏳ {movie.Runtime}</span>
                 </MovieCard>
               ))
             }

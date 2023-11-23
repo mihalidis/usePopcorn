@@ -1,5 +1,10 @@
 import { useState } from "react"
+import PropTypes from "prop-types";
 let typingTimer
+
+Search.prototype = {
+  handleSearchResults: PropTypes.func
+}
 
 function Search({ handleSearchResults }) {
   const [query, setQuery] = useState('');

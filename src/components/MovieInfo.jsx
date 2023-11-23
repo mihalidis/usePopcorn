@@ -34,9 +34,18 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
     setSelectedMovie(null)
   }
 
+  useEffect(() => {
+    if (currentMovie) document.title = `Movie | ${currentMovie.Title}`
+
+    return () => {
+      document.title = 'usePopcorn'
+      console.log('closure in javascript', currentMovie?.Title)
+    }
+  },[currentMovie])
+
   return (
     <>
-      <div className="w-full max-w-lg bg-[#222831] rounded-md relative">
+      <div className="w-full flex-1 bg-[#222831] rounded-md relative">
         <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <img onClick={() => setSelectedMovie(null)} className="h-[30px] absolute top-2 left-2 cursor-pointer" src={BackButton} alt="back-button" />
         <div className="header flex gap-x-[10px] bg-[#393E46] pt-[45px]">
