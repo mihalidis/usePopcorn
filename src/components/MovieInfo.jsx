@@ -39,7 +39,6 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
 
     return () => {
       document.title = 'usePopcorn'
-      console.log('closure in javascript', currentMovie?.Title)
     }
   },[currentMovie])
 

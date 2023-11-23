@@ -8,12 +8,15 @@ import CalendarLogo from "./assets/calendar.png"
 import EmptyState from './components/EmptyState'
 import Loupe from "./assets/loupe.png"
 import Loading from "./components/Loading"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([])
-  const [watchedMovies, setWatchedMovies] = useState([])
+  const [watchedMovies, setWatchedMovies] = useState(() => {
+    const getWatchedMovies = localStorage.getItem('watched')
+    return JSON.parse(getWatchedMovies)
+  })
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSearchResults = async (search) => {
@@ -33,9 +36,17 @@ function App() {
   }
 
   const handleAddToList = (movie, rating) => {
-    const findMovie = watchedMovies.find(item => item.imdbRating === movie.imdbRating)
+    const findMovie = watchedMovies.find(item => item.imdbID === movie.imdbID)
     if (!findMovie) setWatchedMovies((prev) => [...prev, {...movie, userRating: rating}])
   }
+
+  const handleRemoveWatchedMovie = (movie) => {
+    setWatchedMovies((prevValue) => prevValue.filter(item => movie.imdbID !== item.imdbID))
+  }
+
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify(watchedMovies))
+  }, [watchedMovies])
 
   return (
     <>
@@ -61,7 +72,7 @@ function App() {
                             setSelectedMovie={setSelectedMovie}
                             handleAddToList={handleAddToList} />
                             :
-                            <WatchedMovies watchedMovies={watchedMovies} />
+                            <WatchedMovies watchedMovies={watchedMovies} handleRemoveWatchedMovie={handleRemoveWatchedMovie} />
         }
       </div>
     </>
