@@ -12,7 +12,7 @@ function SearchedMovies({ children }) {
 
   return (
     <>
-      <div className="w-full flex-1 bg-[#222831] rounded-md relative">
+      <div className="w-full flex-1 bg-[#222831] rounded-md relative scrollable-container">
         <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className="header bg-[#393E46] px-[16px] pt-[45px] pb-[16px]">
           <h6 className="mb-[8px]">MOVIES LIST</h6>

@@ -44,7 +44,7 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
 
   return (
     <>
-      <div className="w-full flex-1 bg-[#222831] rounded-md relative">
+      <div className="w-full flex-1 bg-[#222831] rounded-md relative scrollable-container">
         <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <img onClick={() => setSelectedMovie(null)} className="h-[30px] absolute top-2 left-2 cursor-pointer" src={BackButton} alt="back-button" />
         <div className="header flex gap-x-[10px] bg-[#393E46] pt-[45px]">
@@ -57,17 +57,20 @@ function MovieInfo({ selectedMovie, setSelectedMovie, handleAddToList }) {
           </div>
         </div>
         {
-          isLoading ? <Loading /> : isOpen && currentMovie && <div className="body flex flex-col items-center gap-y-[20px] pb-[20px]">
-          <div className="flex flex-col items-center gap-y-[20px] rating p-[20px] bg-[#393E46] mt-[16px] w-full max-w-[323px] rounded-md">
-            <Rating selectedStar={selectedStar} setSelectedStar={setSelectedStar} />
-            <button onClick={() => addMovieToList()} className="bg-[#533483] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px] hover:bg-[#71529A]">+Add to list</button>
+          isLoading ? <Loading /> 
+          : 
+          isOpen && currentMovie &&
+          <div className="body flex flex-col items-center gap-y-[20px] p-[16px]">
+            <div className="flex flex-col items-center gap-y-[20px] rating p-[20px] bg-[#393E46] w-full rounded-md ">
+              <Rating selectedStar={selectedStar} setSelectedStar={setSelectedStar} />
+              <button onClick={() => addMovieToList()} className="bg-[#5D5FEF] w-full max-w-[150px] rounded-[50px] px-[16px] py-[8px] hover:bg-[#4a4cbf] shadow-box">+Add to list</button>
+            </div>
+            <div className="movie-info flex flex-col items-start gap-y-[20px] w-full">
+              <span className="text-[16px]">{currentMovie.Plot}</span>
+              <span className="text-[16px]">Starring {currentMovie.Actors}</span>
+              <span className="text-[16px]">Directed by {currentMovie.Director}</span>
+            </div>
           </div>
-          <div className="movie-info flex flex-col items-start gap-y-[20px] w-full max-w-[323px]">
-            <span className="text-[16px]">{currentMovie.Plot}</span>
-            <span className="text-[16px]">Starring {currentMovie.Actors}</span>
-            <span className="text-[16px]">Directed by {currentMovie.Director}</span>
-          </div>
-        </div>
         }
       </div>
     </>

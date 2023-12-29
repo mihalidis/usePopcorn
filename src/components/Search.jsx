@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types";
 let typingTimer
 
@@ -7,6 +7,7 @@ Search.prototype = {
 }
 
 function Search({ handleSearchResults }) {
+  const inputSearch = useRef(null)
   const [query, setQuery] = useState('');
 
   const handleInputChange = (e) => {
@@ -21,10 +22,25 @@ function Search({ handleSearchResults }) {
     handleSearchResults(search)
   }
 
+  useEffect(() => {
+    function callback (e) {
+      if (document.activeElement === inputSearch.current) return;
+      if (e.code === 'Enter') {
+        inputSearch.current.focus()
+        setQuery('')
+      }
+    }
+
+    document.addEventListener('keydown', callback)
+
+    return () => document.addEventListener('keydown', callback)
+  }, [setQuery])
+
   return (
     <>
       <input
-        className="movie-search p-[6px] rounded-md shadow-md bg-[#5C469C]"
+        ref={inputSearch}
+        className="movie-search p-[6px] rounded-md bg-[#5456d7] shadow-box custom-input"
         type="text"
         placeholder="Search movies..."
         value={query}

@@ -53,7 +53,8 @@ function App() {
       <Header handleSearchResults={handleSearchResults} searchResultCount={searchedMovies.length} />
       <div className='flex justify-center mt-[16px] gap-x-[20px]'>
         {
-          isLoading ? <Loading /> : <SearchedMovies>
+          isLoading ? <Loading /> : 
+          <SearchedMovies>
           {
             searchedMovies && searchedMovies.length > 0 ? searchedMovies.map(item => (
               <MovieCard key={item.imdbID} movie={item} poster={item.Poster} title={item.Title} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie}>
@@ -67,12 +68,13 @@ function App() {
         </SearchedMovies>
         }
         {
-          selectedMovie ? <MovieInfo 
-                            selectedMovie={selectedMovie}
-                            setSelectedMovie={setSelectedMovie}
-                            handleAddToList={handleAddToList} />
-                            :
-                            <WatchedMovies watchedMovies={watchedMovies} handleRemoveWatchedMovie={handleRemoveWatchedMovie} />
+          selectedMovie ? 
+          <MovieInfo 
+            selectedMovie={selectedMovie}
+            setSelectedMovie={setSelectedMovie}
+            handleAddToList={handleAddToList} />
+            :
+            <WatchedMovies watchedMovies={watchedMovies} handleRemoveWatchedMovie={handleRemoveWatchedMovie} />
         }
       </div>
     </>

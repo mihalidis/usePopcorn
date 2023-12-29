@@ -9,7 +9,7 @@ Header.propTypes = {
 function Header({ handleSearchResults, searchResultCount }) {
   return (
     <>
-      <div className="flex items-center justify-between w-full p-[20px] bg-[#533483] rounded-md mt-[20px]">
+      <div className="flex items-center justify-between w-full p-[20px] bg-[#5D5FEF] rounded-md mt-[20px] shadow-box">
         <span className="title font-bold text-[22px]">🍿 usePopcorn</span>
         <Search handleSearchResults={handleSearchResults} />
         {searchResultCount > 0 ? <span>Found {searchResultCount} results</span> : <span>No Result Found</span>}

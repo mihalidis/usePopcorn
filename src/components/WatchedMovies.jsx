@@ -21,14 +21,14 @@ function WatchedMovies({ watchedMovies, handleRemoveWatchedMovie }) {
 
   return (
     <>
-      <div className="w-full flex-1 bg-[#222831] rounded-md relative">
+      <div className="w-full flex-1 bg-[#222831] rounded-md relative scrollable-container">
         <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className="header bg-[#393E46] px-[16px] pt-[45px] pb-[16px]">
           <h6 className="mb-[8px]">MOVIES YOU WATCHED</h6>
           <div className="ratings flex gap-x-[16px] items-center">
-            <span className="watched-movie">🎞️ {watchedMoviesCount || '-'} Movies</span>
-            <span className="imdb-rating"><img className="h-[32px] inline" src={ImdbLogo} alt="imdb-logo"></img> {averageImdbRating}</span>
-            <span className="your-rating">🌟 {averageUserRating}</span>
+            {watchedMoviesCount > 0 && <span className="watched-movie">🎞️ {watchedMoviesCount || '-'} Movies</span>}
+            {averageImdbRating > 0 && <span className="imdb-rating"><img className="h-[32px] inline" src={ImdbLogo} alt="imdb-logo"></img> {averageImdbRating}</span>}
+            {averageUserRating > 0 && <span className="your-rating">🌟 {averageUserRating}</span>}
           </div>
         </div>
         {

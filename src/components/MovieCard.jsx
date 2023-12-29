@@ -17,8 +17,8 @@ function MovieCard({children, movie, title, poster, selectedMovie, setSelectedMo
   return (
     <>
       <div onClick={setSelectedMovie ? () => setSelectedMovie(movie) : () => {return}} className={`movie-card flex gap-x-[10px] items-center border-b-4 ${
-          isSelected ? 'border-b-4 border-b-[#4E4FEB]' : 'border-b-4 border-b-[#D65A31]'
-        } cursor-pointer hover:border-b-[#4E4FEB] relative`}>
+          isSelected ? 'border-b-4 border-b-[#5d5fef]' : 'border-b-4 border-b-[#38398f]'
+        } cursor-pointer hover:border-b-[#5d5fef] relative`}>
         <img className="w-[70px] h-[95px] object-cover" src={poster} alt={title} />
         <div className="info p-[10px]">
           <span className="title">{title}</span>
