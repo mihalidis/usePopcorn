@@ -15,7 +15,7 @@ WatchedMovies.propTypes = {
 function WatchedMovies({ watchedMovies, handleRemoveWatchedMovie }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  const watchedMoviesCount = watchedMovies.length;
+  const watchedMoviesCount = watchedMovies ? watchedMovies.length : 0;
   const averageImdbRating = calculateAverage(watchedMovies, 'imdbRating').toFixed(1);
   const averageUserRating = calculateAverage(watchedMovies, 'userRating').toFixed(1);
 
