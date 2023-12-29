@@ -16,8 +16,8 @@ function WatchedMovies({ watchedMovies, handleRemoveWatchedMovie }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const watchedMoviesCount = watchedMovies ? watchedMovies.length : 0;
-  const averageImdbRating = calculateAverage(watchedMovies, 'imdbRating').toFixed(1);
-  const averageUserRating = calculateAverage(watchedMovies, 'userRating').toFixed(1);
+  const averageImdbRating = watchedMovies ? calculateAverage(watchedMovies, 'imdbRating').toFixed(1) : 0;
+  const averageUserRating = watchedMovies ? calculateAverage(watchedMovies, 'userRating').toFixed(1) : 0;
 
   return (
     <>
