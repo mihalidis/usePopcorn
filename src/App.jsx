@@ -8,15 +8,14 @@ import CalendarLogo from "./assets/calendar.png"
 import EmptyState from './components/EmptyState'
 import Loupe from "./assets/loupe.png"
 import Loading from "./components/Loading"
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useLocalStorageState } from './customHooks/useLocalStorageState'
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([])
-  const [watchedMovies, setWatchedMovies] = useState(() => {
-    const getWatchedMovies = localStorage.getItem('watched')
-    return JSON.parse(getWatchedMovies)
-  })
+  const [watchedMovies, setWatchedMovies] = useLocalStorageState([], 'watched')
+
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSearchResults = async (search) => {
@@ -43,10 +42,6 @@ function App() {
   const handleRemoveWatchedMovie = (movie) => {
     setWatchedMovies((prevValue) => prevValue.filter(item => movie.imdbID !== item.imdbID))
   }
-
-  useEffect(() => {
-    localStorage.setItem('watched', JSON.stringify(watchedMovies))
-  }, [watchedMovies])
 
   return (
     <>
